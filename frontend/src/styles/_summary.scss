@@ -1,0 +1,209 @@
+.summary-panel {
+  display: grid;
+  min-width: 0;
+  gap: 1.25rem;
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  &__toolbar {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__heading {
+    display: grid;
+    min-width: 0;
+    gap: 0.25rem;
+
+    > span {
+      color: var(--muted-foreground);
+      font-size: 0.75rem;
+    }
+  }
+
+  &__exports {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__table-frame {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  &__numeric {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+  }
+
+  &__chart-card {
+    gap: 1.25rem;
+    padding-block: 1.25rem;
+    box-shadow: none;
+
+    [data-slot="card-header"],
+    [data-slot="card-content"] {
+      padding-inline: 1rem;
+    }
+  }
+
+  &__selectors {
+    display: grid;
+    min-width: 0;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__selector {
+    display: grid;
+    min-width: 0;
+    gap: 0.5rem;
+
+    [data-slot="native-select-wrapper"] {
+      width: 100%;
+      min-width: 0;
+    }
+
+    [data-slot="label"] {
+      line-height: 1.5;
+    }
+  }
+
+  &__caption,
+  &__chart-empty {
+    margin: 0.75rem 0 0;
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  &__chart-empty {
+    padding-block: 2rem;
+    text-align: center;
+  }
+
+  &__statistics {
+    display: grid;
+    min-width: 0;
+    gap: 1rem;
+  }
+
+  [data-slot="table-header"] {
+    background: color-mix(in srgb, var(--muted) 35%, var(--background));
+  }
+
+  [data-slot="table-head"] {
+    white-space: nowrap;
+  }
+
+  [data-slot="table-cell"] {
+    overflow-wrap: anywhere;
+  }
+}
+
+.summary-measurements {
+  min-width: 47rem;
+  table-layout: fixed;
+
+  [data-slot="table-head"] {
+    &:first-child {
+      width: 28%;
+    }
+    &:nth-child(2) {
+      width: 22%;
+    }
+    &:nth-child(3) {
+      width: 13%;
+    }
+    &:nth-child(4) {
+      width: 13%;
+    }
+  }
+
+  small,
+  time {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  &__attempt strong {
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  &__note {
+    white-space: pre-wrap;
+  }
+  &__result {
+    background: var(--muted);
+  }
+}
+
+.summary-statistics {
+  min-width: 42rem;
+  table-layout: fixed;
+
+  [data-slot="table-head"]:first-child {
+    width: 25%;
+  }
+  [data-slot="table-head"]:nth-child(2) {
+    width: 15%;
+  }
+}
+
+.summary-chart {
+  width: 100%;
+  min-width: 0;
+  height: 19rem;
+  font-family: var(--font-sans);
+
+  .recharts-default-tooltip {
+    max-width: min(24rem, calc(100vw - 3rem));
+    padding: 0.75rem !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius);
+    background: var(--popover) !important;
+    box-shadow: var(--shadow-sm);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+
+  .recharts-tooltip-label {
+    font-weight: 600;
+  }
+  .recharts-tooltip-item {
+    color: var(--foreground) !important;
+  }
+}
+
+@container experiment-detail (min-width: 38rem) {
+  .summary-panel__selectors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .summary-panel__chart-card {
+    [data-slot="card-header"],
+    [data-slot="card-content"] {
+      padding-inline: 1.25rem;
+    }
+  }
+}

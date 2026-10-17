@@ -1,0 +1,270 @@
+[data-slot="dialog-overlay"],
+[data-slot="sheet-overlay"] {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #0006;
+  backdrop-filter: blur(2px);
+  animation: ui-overlay-in 140ms ease-out;
+}
+[data-slot="dialog-content"] {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 51;
+  display: grid;
+  width: min(32rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  gap: 1rem;
+  padding: 1.5rem;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--background);
+  box-shadow: var(--shadow-overlay);
+  outline: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+[data-slot="dialog-header"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 1.5rem;
+}
+[data-slot="dialog-title"] {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+}
+[data-slot="dialog-description"] {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+[data-slot="dialog-footer"] {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+[data-slot="dialog-content"] > [data-slot="dialog-close"],
+[data-slot="sheet-content"] > [data-slot="sheet-close"],
+[data-slot="sidebar"][data-mobile="true"] > [data-slot="sheet-close"] {
+  position: absolute;
+  top: 0.875rem;
+  right: 0.875rem;
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  border: 0;
+  border-radius: calc(var(--radius) - 4px);
+  background: transparent;
+  color: var(--muted-foreground);
+  &:hover {
+    background: var(--accent);
+    color: var(--foreground);
+  }
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+[data-slot="sheet-content"],
+[data-slot="sidebar"][data-mobile="true"] {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 51;
+  display: flex;
+  width: min(24rem, 90vw);
+  flex-direction: column;
+  gap: 1rem;
+  border-left: 1px solid var(--border);
+  background: var(--background);
+  box-shadow: var(--shadow-overlay);
+  outline: none;
+  overscroll-behavior: contain;
+}
+[data-slot="sheet-content"][data-side="left"],
+[data-slot="sidebar"][data-mobile="true"][data-side="left"] {
+  right: auto;
+  left: 0;
+  border-left: 0;
+  border-right: 1px solid var(--border);
+}
+[data-slot="sheet-content"][data-side="top"] {
+  bottom: auto;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+}
+[data-slot="sheet-content"][data-side="bottom"] {
+  top: auto;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--border);
+}
+[data-slot="sheet-header"],
+[data-slot="sheet-footer"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+}
+[data-slot="sheet-footer"] {
+  margin-top: auto;
+}
+[data-slot="sheet-header"].ui-sr-only {
+  padding: 0;
+}
+[data-slot="sheet-title"] {
+  font-weight: 600;
+}
+[data-slot="sheet-description"] {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+[data-slot="dropdown-menu-content"],
+[data-slot="dropdown-menu-sub-content"] {
+  z-index: 60;
+  min-width: 10rem;
+  max-width: calc(100vw - 2rem);
+  max-height: var(--radix-dropdown-menu-content-available-height);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: var(--shadow-overlay);
+}
+[data-slot="dropdown-menu-item"],
+[data-slot="dropdown-menu-checkbox-item"],
+[data-slot="dropdown-menu-radio-item"],
+[data-slot="dropdown-menu-sub-trigger"] {
+  position: relative;
+  display: flex;
+  min-height: 2.25rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: calc(var(--radius) - 4px);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  &[data-highlighted],
+  &[data-state="open"] {
+    background: var(--accent);
+  }
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  &[data-inset="true"] {
+    padding-left: 2rem;
+  }
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+[data-slot="dropdown-menu-checkbox-item"],
+[data-slot="dropdown-menu-radio-item"] {
+  padding-left: 2rem;
+  > span:first-child {
+    position: absolute;
+    left: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+}
+[data-slot="dropdown-menu-label"] {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  &[data-inset="true"] {
+    padding-left: 2rem;
+  }
+}
+[data-slot="dropdown-menu-separator"] {
+  height: 1px;
+  margin: 0.25rem -0.25rem;
+  background: var(--border);
+}
+[data-slot="dropdown-menu-shortcut"] {
+  margin-left: auto;
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+}
+[data-slot="dropdown-menu-sub-trigger"] > svg:last-child {
+  margin-left: auto;
+}
+[data-slot="tooltip-content"] {
+  z-index: 70;
+  max-width: 18rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: calc(var(--radius) - 4px);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  svg {
+    fill: var(--primary);
+  }
+}
+[data-slot="breadcrumb-list"] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+[data-slot="breadcrumb-item"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+[data-slot="breadcrumb-link"] {
+  transition: color 120ms;
+  &:hover {
+    color: var(--foreground);
+  }
+}
+[data-slot="breadcrumb-page"] {
+  color: var(--foreground);
+}
+[data-slot="breadcrumb-separator"] {
+  display: flex;
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+[data-slot="breadcrumb-ellipsis"] {
+  display: flex;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+.journal-toaster {
+  font-family: var(--font-sans);
+  [data-icon] svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+@keyframes ui-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

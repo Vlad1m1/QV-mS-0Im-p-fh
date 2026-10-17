@@ -1,0 +1,13 @@
+.tools/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+data/
+journal-backup*/
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+*.log
+.env
+frontend/NUL
